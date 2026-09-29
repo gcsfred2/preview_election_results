@@ -53,6 +53,19 @@ valor e um segmento vertical a faixa 5%–95%. Acima do gráfico, à direita, fi
 fuso do computador). Cores: 13 ou nome com "Lula" em vermelho; 22 ou nome com "Flávio" ou "Bolsonaro" em azul
 (`CORES_FIXAS`); os demais recebem cores de uma paleta, na ordem da votação.
 
+Abaixo do gráfico fica o **mapa por UF**, redesenhado a cada consulta. Cada UF tem a cor do candidato na frente em
+votos apurados (cinza sem votos) e barras com a % dos votos válidos para os 2 mais votados no país (escala de 0 a
+100%), com a UF e a fração do eleitorado já apurada no título. As barras não seguem as caixas de candidatos. As UFs
+pequenas (RN, PB, PE, AL, SE, ES, RJ, SC) têm as barras no mar, ligadas à UF por uma linha; o exterior fica num canto.
+
+Abaixo do mapa fica um **local em destaque** (`LOCAL`, na célula de configuração): hoje, Ottawa/ZZ, zona 001, seções
+0332, 0333, 0767, 1548, 2858, 2865 e 3260. Mostra os 3 candidatos mais votados, com votos e % dos votos válidos,
+quantas seções já foram totalizadas e o horário dos dados no TSE; a mesma linha vai para o `apuracao.log`. O TSE
+publica o resultado por zona do município (`dados/zz/zz30252-z0001-c0001-e<eleição>-u.json`), não por seção; essas 7
+seções são todas as da zona 0001 de Ottawa (conferido no arquivo de seções do simulado,
+`arquivo-urna/17801/config/zz/zz-p017801-cs.json`). Os boletins por seção (`arquivo-urna/.../dados/...`) vieram vazios
+no simulado e, na eleição, são arquivos binários (ASN.1). Para desligar, `LOCAL = None`.
+
 Os controles usam o `ipywidgets`. Se o Jupyter já estava aberto quando ele foi instalado, reinicie o Jupyter.
 
 ### Parâmetros
@@ -195,6 +208,11 @@ print("seções", d["pst"] + "%", [(c["n"], c["pvap"]) for c in d["cand"]])'
 ```
 
 ## Referências
+
+- Contornos das UFs (`ufs.geojson`): malha do IBGE, qualidade mínima, baixada em 29/09/2026 de
+  `https://servicodados.ibge.gov.br/api/v3/malhas/paises/BR?formato=application/vnd.geo+json&qualidade=minima&intrarregiao=UF`.
+  No arquivo, o código IBGE de cada UF (`codarea`) virou a sigla em minúsculas (`uf`) e as coordenadas foram
+  arredondadas para 3 casas decimais.
 
 - [Informações técnicas sobre a divulgação de resultados (TSE)](https://www.tse.jus.br/eleicoes/informacoes-tecnicas-sobre-a-divulgacao-de-resultados):
   códigos das eleições, simulados, limites de acesso e leiaute dos arquivos (aba Documentos).
