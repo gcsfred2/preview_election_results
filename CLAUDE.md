@@ -54,8 +54,16 @@ events; a running cell would block them. Consequences:
    bar chart per UF with the national top 2 (fixed, ignores the checkboxes). Insets sit at the largest polygon's
    centroid, or at `POSICAO_FORA` (small NE/SE states, DF/GO/PI, and `zz`). Only exterior rings are drawn: GO's hole is
    DF, drawn last. The live thread redraws it each round into a second `Image` (`desenhar_mapa`).
-6. `simular_apuracao`: synthetic count built from the 2022 final results (offline test).
-7. Execution cells for `MODO == "sintetico"` and `MODO == "ao_vivo"`.
+6. Highlighted local (`LOCAL`, `URL_LOCAL` in the config cell; `baixar_local` in the TSE data cell; `resumo_local`
+   and `tabela_local` in the chart cell): top 3 valid candidates of one municipality zone, shown in an `HTML` widget
+   below the map (live mode, "u" layout only) and logged. TSE publishes per zone
+   (`dados/{uf}/{uf}{mun:05}-z{zona:04}-c0001-e{ele:06}-u.json`), not per section; per-section data is only in the
+   ballot-box files (`arquivo-urna/{pleito}/dados/{uf}/{mun}/{zona}/{secao}/…-aux.json` → binary ASN.1 BU), which the
+   simulation left empty. Municipality codes: `{ele}/config/mun-e{ele:06}-cm.json`; sections per zone:
+   `arquivo-urna/{pleito}/config/{uf}/{uf}-p{pleito:06}-cs.json`.
+   In `consultar`, don't name a local `rotulo`: it would shadow the `rotulo()` function for the whole function.
+7. `simular_apuracao`: synthetic count built from the 2022 final results (offline test).
+8. Execution cells for `MODO == "sintetico"` and `MODO == "ao_vivo"`.
 
 ## TSE file formats
 
