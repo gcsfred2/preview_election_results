@@ -49,8 +49,13 @@ events; a running cell would block them. Consequences:
    `{uf, t, e, ea, s, st, vv, cand}`. `adicionar_snapshot` dedups and appends to `snapshots_*.jsonl`.
 3. Model: `lotes` → `proporcao_restante` (per UF) → `projetar` (national sum) → `projetar_com_faixa` (bootstrap).
 4. Charts: `grafico`, `mostrar_tabela`.
-5. `simular_apuracao`: synthetic count built from the 2022 final results (offline test).
-6. Execution cells for `MODO == "sintetico"` and `MODO == "ao_vivo"`.
+5. Map (cells `c08a`/`c08b`): `mapa(historico, atualizacao)` draws `ufs.geojson` (IBGE state borders, source in the
+   README) with plain matplotlib `fill` in lon/lat (aspect `1/cos(15°)`). Fill = UF leader by counted votes; an inset
+   bar chart per UF with the national top 2 (fixed, ignores the checkboxes). Insets sit at the largest polygon's
+   centroid, or at `POSICAO_FORA` (small NE/SE states, DF/GO/PI, and `zz`). Only exterior rings are drawn: GO's hole is
+   DF, drawn last. The live thread redraws it each round into a second `Image` (`desenhar_mapa`).
+6. `simular_apuracao`: synthetic count built from the 2022 final results (offline test).
+7. Execution cells for `MODO == "sintetico"` and `MODO == "ao_vivo"`.
 
 ## TSE file formats
 
