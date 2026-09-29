@@ -52,7 +52,8 @@ events; a running cell would block them. Consequences:
 5. Map (cells `c08a`/`c08b`): `mapa(historico, atualizacao)` draws `ufs.geojson` (IBGE state borders, source in the
    README) with plain matplotlib `fill` in lon/lat (aspect `1/cos(15°)`). Fill = UF leader by counted votes; an inset
    bar chart per UF with the national top 2 (fixed, ignores the checkboxes). Insets sit at the largest polygon's
-   centroid, or at `POSICAO_FORA` (small NE/SE states, DF/GO/PI, and `zz`). Only exterior rings are drawn: GO's hole is
+   centroid, or at `POSICAO_FORA` (small NE/SE states, DF/GO/PI, `zz`, and `br`, the national total incl. abroad,
+   drawn 1.4x with a thick frame). Legend: national top 4 only. Only exterior rings are drawn: GO's hole is
    DF, drawn last. The live thread redraws it each round into a second `Image` (`desenhar_mapa`).
 6. Highlighted local (`LOCAL`, `URL_LOCAL` in the config cell; `baixar_local` in the TSE data cell; `resumo_local`
    and `tabela_local` in the chart cell): top 3 valid candidates of one municipality zone, shown in an `HTML` widget

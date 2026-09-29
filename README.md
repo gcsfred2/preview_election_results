@@ -57,6 +57,8 @@ Abaixo do gráfico fica o **mapa por UF**, redesenhado a cada consulta. Cada UF 
 votos apurados (cinza sem votos) e barras com a % dos votos válidos para os 2 mais votados no país (escala de 0 a
 100%), com a UF e a fração do eleitorado já apurada no título. As barras não seguem as caixas de candidatos. As UFs
 pequenas (RN, PB, PE, AL, SE, ES, RJ, SC) têm as barras no mar, ligadas à UF por uma linha; o exterior fica num canto.
+No alto, à direita, um quadro maior, **Brasil**, mostra o total nacional (inclui o exterior). A legenda lista os 4
+candidatos mais votados no país.
 
 Abaixo do mapa fica um **local em destaque** (`LOCAL`, na célula de configuração): hoje, Ottawa/ZZ, zona 001, seções
 0332, 0333, 0767, 1548, 2858, 2865 e 3260. Mostra os 3 candidatos mais votados, com votos e % dos votos válidos,
