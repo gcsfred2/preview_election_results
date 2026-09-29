@@ -9,6 +9,6 @@ set -euo pipefail
 source .venv/bin/activate
 pip install -q --disable-pip-version-check notebook numpy matplotlib ipywidgets
 
-export MODO="${MODO:-ao_vivo}" CONFIG="${CONFIG:-simulado2026}" INTERVALO_S="${INTERVALO_S:-120}"
+export MODO="${MODO:-ao_vivo}" CONFIG="${CONFIG:-simulado2026}" INTERVALO_S="${INTERVALO_S:-30}"
 echo "MODO=$MODO CONFIG=$CONFIG INTERVALO_S=$INTERVALO_S"
 exec jupyter notebook previsao_apuracao.ipynb

@@ -3,7 +3,7 @@
 Projects Brazil's presidential election result from TSE's partial counts. Everything lives in
 `previsao_apuracao.ipynb` (Portuguese names and comments; keep it that way). `README.md` has run instructions,
 election codes and sample `curl` commands. `rodar.sh` creates `.venv`, installs the dependencies and opens the notebook
-in live mode (defaults `MODO=ao_vivo CONFIG=simulado2026 INTERVALO_S=120`, overridable by env vars). It assumes it
+in live mode (defaults `MODO=ao_vivo CONFIG=simulado2026 INTERVALO_S=30`, overridable by env vars). It assumes it
 runs from the repo root. Keep it in sync with the README's run steps.
 
 ## Scope

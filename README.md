@@ -25,7 +25,7 @@ jupyter notebook previsao_apuracao.ipynb
 
 Ou, depois do `git clone`, use o script `rodar.sh` na raiz do repositório. Ele faz esses passos (cria o `.venv` se
 ainda não existir e instala as dependências) e abre o notebook no modo ao vivo do simulado do TSE
-(`MODO=ao_vivo CONFIG=simulado2026 INTERVALO_S=120`):
+(`MODO=ao_vivo CONFIG=simulado2026 INTERVALO_S=30`):
 
 ```bash
 cd preview_election_results
@@ -53,7 +53,7 @@ configuração):
 | `MODO` | `sintetico` (teste offline, sem depender de eleição em andamento) ou `ao_vivo` (consulta o TSE) | `sintetico` |
 | `CONFIG` | `2022_2turno`, `simulado2026`, `2026_1turno`, `2026_2turno` | `2022_2turno` |
 | `ELEICAO` | código da eleição; substitui o da configuração (obrigatório em `2026_2turno`) | — |
-| `INTERVALO_S` | segundos entre consultas no modo ao vivo | `120` |
+| `INTERVALO_S` | segundos entre consultas no modo ao vivo | `30` |
 
 O limite do TSE é de 100 requisições por segundo por IP (bloqueio de 10 minutos se excedido). Cada consulta do
 notebook faz 28 requisições (27 UFs + exterior), bem abaixo disso.
@@ -76,7 +76,7 @@ O TSE publica apurações de teste com candidatos fictícios. Janelas de 2026: 1
 14h–17h), e 28 e 29/09 (14h–16h).
 
 ```bash
-MODO=ao_vivo CONFIG=simulado2026 INTERVALO_S=120 jupyter notebook previsao_apuracao.ipynb
+MODO=ao_vivo CONFIG=simulado2026 INTERVALO_S=30 jupyter notebook previsao_apuracao.ipynb
 # ou, equivalente:
 ./rodar.sh
 ```
