@@ -34,7 +34,11 @@ CONFIG=2026_1turno ./rodar.sh   # as variáveis da tabela abaixo trocam os padr�
 ```
 
 No Jupyter, rode todas as células (**Run → Run All Cells**). No modo ao vivo, a última célula consulta o TSE numa
-thread em segundo plano e mostra, acima do gráfico:
+thread em segundo plano. O registro de cada consulta (projeção, faixa, tabela por UF e falhas de download) vai para o
+arquivo `apuracao.log` (ignorado pelo git), não para o notebook. O `rodar.sh` mostra esse registro no terminal, junto
+com o log do Jupyter; sem ele, acompanhe com `tail -f apuracao.log`.
+
+No notebook ficam só o gráfico e, acima dele:
 
 - **Zoom X** e **Zoom Y**: multiplicadores (padrão 1, passo 0,2). Com zoom *z*, o gráfico mostra 1/*z* da largura ou
   da altura; o eixo x termina perto do ponto mais recente e o eixo y fica centrado nas curvas visíveis. O gráfico é

@@ -4,7 +4,8 @@ Projects Brazil's presidential election result from TSE's partial counts. Everyt
 `previsao_apuracao.ipynb` (Portuguese names and comments; keep it that way). `README.md` has run instructions,
 election codes and sample `curl` commands. `rodar.sh` creates `.venv`, installs the dependencies and opens the notebook
 in live mode (defaults `MODO=ao_vivo CONFIG=simulado2026 INTERVALO_S=30`, overridable by env vars). It assumes it
-runs from the repo root. Keep it in sync with the README's run steps.
+runs from the repo root. It also runs `tail -F apuracao.log` in the background (killed on exit) so the live loop's log
+shows in the same terminal as the Jupyter server log. Keep it in sync with the README's run steps.
 
 ## Scope
 
@@ -23,8 +24,10 @@ events; a running cell would block them. Consequences:
 
 - `grafico` builds a `matplotlib.figure.Figure` (not pyplot) and returns it; the thread renders it to PNG into an
   `ipywidgets.Image`. `evolucao` is appended and drawn under `trava`.
-- The thread must not use `print()`/`redirect_stdout`: `sys.stdout` is shared with every cell. It writes to a
-  `StringIO` shown in an `HTML` widget (`mostrar_tabela` takes `arquivo=`).
+- The thread must not use `print()`/`redirect_stdout`: `sys.stdout` is shared with every cell. It writes each round
+  to a `StringIO` (`mostrar_tabela` takes `arquivo=`) and appends it to `ARQUIVO_LOG` (`apuracao.log`), not to the
+  notebook. Writing to the kernel's terminal instead is unreliable: ipykernel captures fd 1/2 and may send it back to
+  a cell. The notebook shows only the widgets, the chart and a waiting message that hides on the first draw.
 - Stop is a `threading.Event`, passed as an argument (re-running the cell rebinds the global and sets the old one).
 
 ## Notebook layout

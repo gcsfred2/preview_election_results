@@ -1,3 +1,4 @@
 snapshots_*.jsonl
 .ipynb_checkpoints/
 .venv/
+apuracao.log
