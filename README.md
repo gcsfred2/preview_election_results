@@ -53,7 +53,7 @@ configuração):
 | `MODO` | `sintetico` (teste offline, sem depender de eleição em andamento) ou `ao_vivo` (consulta o TSE) | `sintetico` |
 | `CONFIG` | `2022_2turno`, `simulado2026`, `2026_1turno`, `2026_2turno` | `2022_2turno` |
 | `ELEICAO` | código da eleição; substitui o da configuração (obrigatório em `2026_2turno`) | — |
-| `INTERVALO_S` | segundos entre consultas no modo ao vivo | `60` |
+| `INTERVALO_S` | segundos entre consultas no modo ao vivo | `30` |
 
 O limite do TSE é de 100 requisições por segundo por IP (bloqueio de 10 minutos se excedido). Cada consulta do
 notebook faz 28 requisições (27 UFs + exterior), bem abaixo disso.
