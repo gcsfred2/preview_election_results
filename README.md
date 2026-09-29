@@ -23,6 +23,16 @@ pip install notebook numpy matplotlib
 jupyter notebook previsao_apuracao.ipynb
 ```
 
+Ou, depois do `git clone`, use o script `rodar.sh` na raiz do repositório. Ele faz esses passos (cria o `.venv` se
+ainda não existir e instala as dependências) e abre o notebook no modo ao vivo do simulado do TSE
+(`MODO=ao_vivo CONFIG=simulado2026 INTERVALO_S=30`):
+
+```bash
+cd preview_election_results
+./rodar.sh
+CONFIG=2026_1turno ./rodar.sh   # as variáveis da tabela abaixo trocam os padrões
+```
+
 No Jupyter, rode todas as células (**Run → Run All Cells**). No modo ao vivo, a última célula fica em laço consultando
 o TSE; para parar, interrompa o kernel (**Kernel → Interrupt**).
 
@@ -60,6 +70,8 @@ O TSE publica apurações de teste com candidatos fictícios. Janelas de 2026: 1
 
 ```bash
 MODO=ao_vivo CONFIG=simulado2026 INTERVALO_S=30 jupyter notebook previsao_apuracao.ipynb
+# ou, equivalente:
+./rodar.sh
 ```
 
 Parâmetros usados (`CONFIG=simulado2026`):
