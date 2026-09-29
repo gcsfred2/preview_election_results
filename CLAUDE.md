@@ -29,6 +29,17 @@ events; a running cell would block them. Consequences:
   notebook. Writing to the kernel's terminal instead is unreliable: ipykernel captures fd 1/2 and may send it back to
   a cell. The notebook shows only the widgets, the chart and a waiting message that hides on the first draw.
 - Stop is a `threading.Event`, passed as an argument (re-running the cell rebinds the global and sets the old one).
+- Candidate checkboxes are created by the thread (`atualizar_caixas`) as candidates appear. `estado["automatico"]`
+  marks changes made by code (they neither redraw nor count as a user choice); after the first user change
+  (`estado["manual"]`) the top-`N_EXIBIDOS` auto-selection stops. `grafico(candidatos=...)` draws the ticked ones.
+- `desenhar` errors are caught and logged: an exception in the thread would otherwise end polling silently.
+
+## Chart gotchas
+
+- The bootstrap band (p5–p95) does not always contain the point projection (`final`), so draw it as a segment
+  (`vlines`), never as `errorbar` (negative `yerr` raises).
+- Colours: `cor(c)` caches per candidate. `CORES_FIXAS` (13/"lula" red, 22/"flávio"/"bolsonaro" blue, case-insensitive
+  on the ballot name) win; others take the next `PALETA` colour (tab10 minus blue/red) in order of first appearance.
 
 ## Notebook layout
 

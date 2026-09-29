@@ -44,6 +44,14 @@ No notebook ficam só o gráfico e, acima dele:
   da altura; o eixo x termina perto do ponto mais recente e o eixo y fica centrado nas curvas visíveis. O gráfico é
   redesenhado na hora, sem esperar a próxima consulta.
 - **Parar**: encerra as consultas. Para recomeçar, rode a célula de novo.
+- **Candidatos**: uma caixa por candidato (aparecem com os primeiros votos), mais **Todos** e **Nenhum**. De início
+  ficam marcados os 3 mais votados (`N_EXIBIDOS`), e as marcações acompanham o ranking até você marcar ou desmarcar
+  alguma caixa; a partir daí, valem as suas escolhas.
+
+No gráfico, a última projeção de cada candidato é levada até 100% apurado (linha pontilhada), onde um ponto mostra o
+valor e um segmento vertical a faixa 5%–95%. Acima do gráfico, à direita, fica a **última atualização** (data, hora e
+fuso do computador). Cores: 13 ou nome com "Lula" em vermelho; 22 ou nome com "Flávio" ou "Bolsonaro" em azul
+(`CORES_FIXAS`); os demais recebem cores de uma paleta, na ordem da votação.
 
 Os controles usam o `ipywidgets`. Se o Jupyter já estava aberto quando ele foi instalado, reinicie o Jupyter.
 
