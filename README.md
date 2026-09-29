@@ -19,7 +19,7 @@ git clone https://github.com/gcsfred2/preview_election_results.git
 cd preview_election_results
 python3 -m venv .venv
 source .venv/bin/activate
-pip install notebook numpy matplotlib
+pip install notebook numpy matplotlib ipywidgets
 jupyter notebook previsao_apuracao.ipynb
 ```
 
@@ -33,8 +33,15 @@ cd preview_election_results
 CONFIG=2026_1turno ./rodar.sh   # as variáveis da tabela abaixo trocam os padrões
 ```
 
-No Jupyter, rode todas as células (**Run → Run All Cells**). No modo ao vivo, a última célula fica em laço consultando
-o TSE; para parar, interrompa o kernel (**Kernel → Interrupt**).
+No Jupyter, rode todas as células (**Run → Run All Cells**). No modo ao vivo, a última célula consulta o TSE numa
+thread em segundo plano e mostra, acima do gráfico:
+
+- **Zoom X** e **Zoom Y**: multiplicadores (padrão 1, passo 0,2). Com zoom *z*, o gráfico mostra 1/*z* da largura ou
+  da altura; o eixo x termina perto do ponto mais recente e o eixo y fica centrado nas curvas visíveis. O gráfico é
+  redesenhado na hora, sem esperar a próxima consulta.
+- **Parar**: encerra as consultas. Para recomeçar, rode a célula de novo.
+
+Os controles usam o `ipywidgets`. Se o Jupyter já estava aberto quando ele foi instalado, reinicie o Jupyter.
 
 ### Parâmetros
 

@@ -12,8 +12,20 @@ Presidential race only (cargo `0001`). Don't add other offices unless asked.
 
 ## Dependencies
 
-numpy, matplotlib and the standard library only (`urllib`, `json`). No pandas or requests, so it runs on a bare
-`pip install notebook numpy matplotlib`. It needs network access; JupyterLite can't reach TSE.
+numpy, matplotlib, ipywidgets (live-mode controls only) and the standard library (`urllib`, `json`). No pandas or
+requests, so it runs on a bare `pip install notebook numpy matplotlib ipywidgets`. It needs network access; JupyterLite
+can't reach TSE.
+
+## Live mode threading
+
+The `ao_vivo` cell starts the polling loop in a daemon thread and returns, so the widgets (Zoom X, Zoom Y, Parar) get
+events; a running cell would block them. Consequences:
+
+- `grafico` builds a `matplotlib.figure.Figure` (not pyplot) and returns it; the thread renders it to PNG into an
+  `ipywidgets.Image`. `evolucao` is appended and drawn under `trava`.
+- The thread must not use `print()`/`redirect_stdout`: `sys.stdout` is shared with every cell. It writes to a
+  `StringIO` shown in an `HTML` widget (`mostrar_tabela` takes `arquivo=`).
+- Stop is a `threading.Event`, passed as an argument (re-running the cell rebinds the global and sets the old one).
 
 ## Notebook layout
 
@@ -55,15 +67,16 @@ design.
 
 ## Testing
 
-No test suite. To check changes, run the notebook's code outside Jupyter (see below). With `MPLBACKEND=Agg`,
-`plt.show()` is a no-op, so replace it with `plt.savefig(...)` if you want to see the figures.
+No test suite. To check changes, run the notebook's code outside Jupyter (see below). `grafico` returns a figure;
+call `.savefig(...)` on it to see it. The live cell calls `display`; outside Jupyter, stub it, and the widgets work
+headless (set `.value`, call `parar.click()`).
+
+As of 29/09/2026 TSE returns 404 for the 2022 files, so `MODO=sintetico` and `CONFIG=2022_2turno` fail at download.
+Build the per-UF `finais` by hand and feed them to `simular_apuracao` instead.
 
 - `MODO=sintetico` (default): deterministic (seeded). Projection error for B22 should be around ±0.4 pp from ~30%
   counted and exactly 0 at 100%.
 - `MODO=ao_vivo CONFIG=2022_2turno`: fetches the final 2022 data; must print L13 50.90% / B22 49.10% and exit.
 - `MODO=ao_vivo CONFIG=simulado2026`: outside a simulation window it shows the last completed test count and exits.
-
-The live cell imports `IPython.display`, so outside Jupyter stub `clear_output` or run through
-`jupyter nbconvert --to notebook --execute`.
 
 When editing the `.ipynb`, keep the saved outputs of the synthetic run so GitHub renders the chart.
